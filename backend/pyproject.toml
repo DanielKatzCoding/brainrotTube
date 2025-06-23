@@ -9,3 +9,8 @@ dependencies = [
     "pydantic>=2.11.7",
     "uvicorn>=0.34.3",
 ]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.12.0",
+]
