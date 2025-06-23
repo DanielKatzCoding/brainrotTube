@@ -44,8 +44,7 @@ export default function VideoCard({ title, src }: { title: string; src: string }
         } else {
             pauseBtnRef.current!.hidden = true;
             video.play();
-        }        
-        
+        }
     });
 
     // Smooth progress bar animation

@@ -1,16 +1,22 @@
 "use client";
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import VideoCard from './VideoCard';
 
 interface VideoGalleryProps {
   files: string[];
 }
 
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
 export default function VideoGallery({ files }: VideoGalleryProps) {
   return (
-    <>
+    <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <main>
         <Container maxWidth="xl">
@@ -23,6 +29,6 @@ export default function VideoGallery({ files }: VideoGalleryProps) {
           </Grid>
         </Container>
       </main>
-    </>
+    </ThemeProvider>
   );
 }
