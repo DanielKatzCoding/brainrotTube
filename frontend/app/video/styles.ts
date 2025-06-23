@@ -14,12 +14,6 @@ export const IconButtonStyled = styled(IconButton)(() => ({
   }
 }));
 
-export const SliderBox = styled(Box)(() => ({
-  width: '100%',
-  paddingLeft: 16,
-  paddingRight: 16,
-}));
-
 export const VideoFlexContainer = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'center',
@@ -27,5 +21,28 @@ export const VideoFlexContainer = styled(Box)(() => ({
   width: '100%',
   height: '100%',
   position: 'relative',
+}));
+
+export const SliderBox = styled(Box)(() => ({
+  display: 'flex', 
+  alignItems: 'center', 
+  justifyContent: 'flex-start', 
+  width: '90%'
+}));
+
+export const VolumeBox = styled(Box)(() => ({
+  display: 'flex', 
+  alignItems: 'center', 
+  justifyContent: 'center',
+  width: '10%'
+}));
+
+export const VolumeSliderContainer = styled('div')(() => ({
+  position: 'absolute',
+  bottom: '2.5rem',
+  left: '50%',
+  transform: 'translateX(-50%)',
+  display: 'none',
+  zIndex: 2,
 }));
 

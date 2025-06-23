@@ -1,12 +1,9 @@
 "use client";
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { Button, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import VideoCard from './VideoCard';
-
-interface VideoGalleryProps {
-  files: string[];
-}
+import { useState } from 'react';
 
 const darkTheme = createTheme({
   palette: {
@@ -14,18 +11,21 @@ const darkTheme = createTheme({
   },
 });
 
-export default function VideoGallery({ files }: VideoGalleryProps) {
+export default function VideoGallery() {
+  const [media_index, setMediaIndex] = useState(0);
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <main>
         <Container maxWidth="xl">
+          <Grid container spacing={2}>            
+            <VideoCard key={1} title="the title" src={`http://localhost:8000/api/media?index=${media_index}`} />            
+          </Grid>
           <Grid container spacing={2}>
-            {
-              files.map((f, idx) => (
-                <VideoCard key={idx} title={f.split('.')[0]} src={`/media/${f}`} />
-              ))
-            }
+            <Button variant="contained" color="primary" 
+            onClick={() => setMediaIndex((prev) => (prev + 1))}>
+              Next Video
+            </Button>
           </Grid>
         </Container>
       </main>
