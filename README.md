@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BrainRotTube
+
+A full-stack TikTok-like video platform focused on "brainrot" content. This project is designed to practice and showcase full-stack development skills using Next.js (React, MUI) for the frontend and FastAPI for the backend.
+
+## Features
+- Videos with interactive controls (play/pause, seek, volume, mute)
+- Keyboard shortcuts for video control
+- Responsive, modern UI with Material UI (MUI) and dark mode
+- Backend API for serving and paginating video files
+- Video navigation/history (forward, backward, random)
+
+## Tech Stack
+- **Frontend:** Next.js (React, MUI, Emotion)
+- **Backend:** FastAPI (Python)
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js (v18+ recommended)
+- Python 3.9+
+- [pnpm](https://pnpm.io/) (or npm/yarn)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Installation
+
+#### 1. Clone the repository
+```sh
+git clone https://github.com/DanielKatzCoding/brainrot-tube.git
+cd brainrot-tube
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### 2. Install frontend dependencies
+```sh
+cd frontend
+pnpm install
+# or
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### 3. Install backend dependencies
+```sh
+cd ../backend
+# Install uv (if not already installed)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+# Install backend dependencies (no dev dependencies)
+uv sync
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Running the App
 
-To learn more about Next.js, take a look at the following resources:
+### 1. Start the backend (FastAPI)
+```sh
+cd backend
+uv run app.py
+```
+- The backend will be available at `http://localhost:8000`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. Start the frontend (Next.js)
+```sh
+cd frontend
+pnpm dev
+# or
+npm run dev
+```
+- The frontend will be available at `http://localhost:3000`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Frontend (Any Node Host)
+- Build the frontend:
+  ```sh
+  pnpm build
+  # or
+  npm run build
+  ```
+- Deploy the `frontend/.next` output to your preferred Node.js host.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Backend (Any Python Host/Cloud)
+- Deploy the FastAPI app using `uv run app.py` or a compatible Python host/cloud service.
+- Make sure to set the correct CORS and environment variables for production.
+
+---
+
+## Project Summary
+This project aims to practice my full-stack skills. I will be making a TikTok-like platform that will focus on brainrot content. The app demonstrates modern React patterns, API integration, and a clean, interactive UI for video consumption.
+
+---
+
+## License
+MIT
