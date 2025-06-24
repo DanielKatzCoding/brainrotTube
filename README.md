@@ -26,7 +26,7 @@ A full-stack TikTok-like video platform focused on "brainrot" content. This proj
 
 #### 1. Clone the repository
 ```sh
-git clone https://github.com/DanielKatzCoding/brainrot-tube.git
+git clone https://github.com/DanielKatzCoding/brainrotTube.git
 cd brainrot-tube
 ```
 
