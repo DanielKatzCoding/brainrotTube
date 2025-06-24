@@ -5,3 +5,8 @@ export interface IMediaContent {
     likesCount: number,
     commentsCount: number,
 }
+
+export interface IMediaHistory {
+    currIndex: number,
+    mediaHistory: number[],
+}
