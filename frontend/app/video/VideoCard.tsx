@@ -10,13 +10,15 @@ import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import { IconButtonStyled, VideoFlexContainer, SliderBox, VolumeBox, VolumeSliderContainer } from './styles';
 
 export default function VideoCard({ title, src }: { title: string; src: string }) {
-    const [playing, setPlaying] = useState(false);
+    const [playing, setPlaying] = useState(true);
     const [duration, setDuration] = useState(0);
     const [progress, setProgress] = useState(0);
     const [volume, setVolume] = useState(1);
+    const [showVolumeSlider, setShowVolumeSlider] = useState(false);
     const videoRef = useRef<HTMLVideoElement>(null);
     const pauseBtnRef = useRef<HTMLButtonElement>(null);
     const animationRef = useRef<number | null>(null);
+    const volumeSliderTimeout = useRef<NodeJS.Timeout | null>(null);
 
 
     const handleVideoClick = () => {
@@ -56,6 +58,44 @@ export default function VideoCard({ title, src }: { title: string; src: string }
             return <VolumeUpIcon sx={{ fontSize: '2rem' }} />;
         }
     }
+
+    // keyboard event listener
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            let soundKey = false;
+            if (e.key === ' ') {
+                e.preventDefault(); // Prevent scrolling
+                handleVideoClick();
+            } else if (e.key === 'ArrowRight') {
+                if (videoRef.current) {
+                    videoRef.current.currentTime += 5; // Skip forward 5 seconds
+                }
+            } else if (e.key === 'ArrowLeft') {
+                if (videoRef.current) {
+                    videoRef.current.currentTime -= 5; // Skip backward 5 seconds
+                }
+            } else if (e.key === 'ArrowUp') {
+                setVolume((prev) => Math.min(prev + 0.1, 1)); // Increase volume
+                soundKey = true;
+            } else if (e.key === 'ArrowDown') {
+                setVolume((prev) => Math.max(prev - 0.1, 0)); // Decrease volume
+                soundKey = true;
+            } else if (e.key === 'm') {
+                setVolume((prev) => (prev === 0 ? 1 : 0)); // Mute/unmute
+                soundKey = true;
+            }
+            if (soundKey) {
+                setShowVolumeSlider(true);
+                if (volumeSliderTimeout.current) clearTimeout(volumeSliderTimeout.current);
+                volumeSliderTimeout.current = setTimeout(() => setShowVolumeSlider(false), 1000);
+            }
+        }
+        window.addEventListener('keydown', handleKeyDown)
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            if (volumeSliderTimeout.current) clearTimeout(volumeSliderTimeout.current);
+        }
+    }, []);
 
     // Toggle play/pause state when video is clicked
     useEffect(() => {
@@ -152,7 +192,7 @@ export default function VideoCard({ title, src }: { title: string; src: string }
                         if (slider) slider.style.display = 'none';
                     }}
                 >
-                    <VolumeSliderContainer className="volume-slider-container">
+                    <VolumeSliderContainer className="volume-slider-container" style={{ display: showVolumeSlider ? 'block' : undefined }}>
                         <Slider
                             orientation="vertical"
                             value={volume}
