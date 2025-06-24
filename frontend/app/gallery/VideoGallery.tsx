@@ -1,7 +1,6 @@
 "use client";
 import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
-import { Button, Box, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { Box, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import VideoCard from '../video/VideoCard';
 import { useState, useRef, createContext } from 'react';
 import VideoNavigator from '../navigator/VideoNavigator';

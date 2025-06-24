@@ -10,7 +10,7 @@ import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import { IconButtonStyled, VideoFlexContainer, SliderBox, VolumeBox, VolumeSliderContainer } from './styles';
 
 export default function VideoCard({ title, src }: { title: string; src: string }) {
-    const [playing, setPlaying] = useState(true);
+    const [playing, setPlaying] = useState(false);
     const [duration, setDuration] = useState(0);
     const [progress, setProgress] = useState(0);
     const [volume, setVolume] = useState(1);
@@ -39,7 +39,7 @@ export default function VideoCard({ title, src }: { title: string; src: string }
         }
     }
 
-    const handleVolumeChange = (_: any, newValue: number | number[]) => {
+    const handleVolumeChange = (_: Event, newValue: number | number[]) => {
         const newVol = Array.isArray(newValue) ? newValue[0] : newValue;
         setVolume(newVol);
         if (videoRef.current) {

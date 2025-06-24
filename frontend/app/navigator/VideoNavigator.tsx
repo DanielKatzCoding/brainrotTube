@@ -13,7 +13,7 @@ const VideoNavigator = () => {
     const {mediaHistory, setMediaHistory} = useContext(MediaHistoryContext);
     
     const handleFirst = () => {
-        setMediaHistory((prev) => ({
+        setMediaHistory(() => ({
             currIndex: 0, 
             mediaHistory: [mediaIndex]
         }));
