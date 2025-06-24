@@ -54,7 +54,6 @@ export default function VideoGallery() {
                   <Grid size="auto" alignContent="center">            
                     <VideoNavigator />
                   </Grid>
-
                   <Grid size={10}>
                     <VideoCard title="the title" src={apiUrl.current + `?index=${mediaIndex}`} />            
                   </Grid>      

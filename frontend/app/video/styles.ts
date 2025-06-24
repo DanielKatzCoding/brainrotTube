@@ -39,7 +39,7 @@ export const VolumeBox = styled(Box)(() => ({
 
 export const VolumeSliderContainer = styled('div')(() => ({
   position: 'absolute',
-  bottom: '2.5rem',
+  bottom: '3.5rem',
   left: '50%',
   transform: 'translateX(-50%)',
   display: 'none',
