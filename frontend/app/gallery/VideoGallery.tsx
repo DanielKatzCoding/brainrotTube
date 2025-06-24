@@ -1,7 +1,7 @@
 "use client";
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
-import { Button, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { Button, Box, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import VideoCard from '../video/VideoCard';
 import { useState, useRef, createContext } from 'react';
 import VideoNavigator from '../navigator/VideoNavigator';
@@ -46,24 +46,23 @@ export default function VideoGallery() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <main>
-        <Container maxWidth="xl">    
+        <Box maxWidth="xl" padding={2}>    
           <MediaHistoryContext.Provider value={{ mediaHistory, setMediaHistory }}>  
             <MaxMediaIndexContext.Provider value={maxMediaIndex}>
               <MediaIndexContext.Provider value={{ mediaIndex, setMediaIndex }}>
-                <Grid container spacing={2}>            
-                  <VideoCard key={1} title="the title" src={apiUrl.current + `?index=${mediaIndex}`} />            
-                </Grid>
-                <Grid container spacing={2}>
-                  {/* <Button variant="contained" color="primary" 
-                  onClick={() => setMediaIndex((prev) => (prev + 1))}>
-                    Next Video
-                  </Button> */}
-                  <VideoNavigator />
+                <Grid container spacing={0} gap={0} alignContent="center" justifyContent="flex-start">      
+                  <Grid size="auto" alignContent="center">            
+                    <VideoNavigator />
+                  </Grid>
+
+                  <Grid size={10}>
+                    <VideoCard title="the title" src={apiUrl.current + `?index=${mediaIndex}`} />            
+                  </Grid>      
                 </Grid>
               </MediaIndexContext.Provider>
             </MaxMediaIndexContext.Provider>
           </MediaHistoryContext.Provider>
-        </Container>
+        </Box>
       </main>
     </ThemeProvider>
   );
