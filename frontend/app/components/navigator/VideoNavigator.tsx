@@ -5,11 +5,11 @@ import { Box } from '@mui/material'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { CircleBtn } from './style'
-import { MediaHistoryContext, MediaIndexContext, MaxMediaIndexContext, getRandomInt } from '../gallery/VideoGallery'
+import { MediaHistoryContext, MediaIndexContext, MaxMediaCountContext, getRandomInt } from '../videoContent/VideoContent'
 
 const VideoNavigator = () => {
     const {mediaIndex, setMediaIndex} = useContext(MediaIndexContext)
-    const maxMediaIndex = useContext(MaxMediaIndexContext)
+    const maxMediaIndex = useContext(MaxMediaCountContext)
     const {mediaHistory, setMediaHistory} = useContext(MediaHistoryContext);
     
     const handleFirst = () => {
@@ -69,10 +69,10 @@ const VideoNavigator = () => {
     return (
         <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
             <CircleBtn onClick={() => handleBackward()}>
-                <KeyboardArrowUpIcon sx={{fontSize: '4rem', padding: '.5rem'}} />
+                <KeyboardArrowUpIcon sx={{fontSize: '3.6rem', padding: '.5rem'}} />
             </CircleBtn>
             <CircleBtn onClick={() => handleNext()}>
-                <KeyboardArrowDownIcon sx={{fontSize: '4rem', padding: '.5rem'}} />
+                <KeyboardArrowDownIcon sx={{fontSize: '3.6rem', padding: '.5rem'}} />
             </CircleBtn>
         </Box>
     )

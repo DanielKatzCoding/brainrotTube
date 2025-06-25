@@ -1,11 +1,10 @@
-import VideoGallery from './gallery/VideoGallery';
+import VideoContent from './components/videoContent/VideoContent';
 import React from 'react';
 
-
-export default async function Home() {
+export default function Home() {
   return (
     <>
-      <VideoGallery />
+      <VideoContent />
     </>
   );
 }
