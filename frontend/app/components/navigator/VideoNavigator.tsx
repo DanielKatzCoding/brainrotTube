@@ -5,11 +5,11 @@ import { Box } from '@mui/material'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { CircleBtn } from './style'
-import { MediaHistoryContext, MediaIndexContext, MaxMediaIndexContext, getRandomInt } from '../videoContent/VideoContent'
+import { MediaHistoryContext, MediaIndexContext, MaxMediaCountContext, getRandomInt } from '../videoContent/VideoContent'
 
 const VideoNavigator = () => {
     const {mediaIndex, setMediaIndex} = useContext(MediaIndexContext)
-    const maxMediaIndex = useContext(MaxMediaIndexContext)
+    const maxMediaIndex = useContext(MaxMediaCountContext)
     const {mediaHistory, setMediaHistory} = useContext(MediaHistoryContext);
     
     const handleFirst = () => {

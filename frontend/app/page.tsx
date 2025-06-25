@@ -1,6 +1,5 @@
-import VideoContent from './videoContent/VideoContent';
+import VideoContent from './components/videoContent/VideoContent';
 import React from 'react';
-import { Paper, rgbToHex } from '@mui/material';
 
 export default function Home() {
   return (
