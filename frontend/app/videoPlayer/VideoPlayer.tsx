@@ -9,7 +9,7 @@ import VolumeMuteIcon from '@mui/icons-material/VolumeMute';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import { IconButtonStyled, VideoFlexContainer, SliderBox, VolumeBox, VolumeSliderContainer } from './styles';
 
-export default function VideoCard({ title, src }: { title: string; src: string }) {
+export default function VideoPlayer({ title, src }: { title: string; src: string }) {
     const [playing, setPlaying] = useState(false);
     const [duration, setDuration] = useState(0);
     const [progress, setProgress] = useState(0);
@@ -155,7 +155,7 @@ export default function VideoCard({ title, src }: { title: string; src: string }
 
 
     return (
-        <Card sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+        <>
             <VideoFlexContainer>
                 <CardMedia
                     component="video"
@@ -208,6 +208,6 @@ export default function VideoCard({ title, src }: { title: string; src: string }
                     </IconButtonStyled>
                 </VolumeBox>                
             </Container>
-        </Card>
+        </>
     );
 }

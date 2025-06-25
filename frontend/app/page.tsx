@@ -1,11 +1,11 @@
-import VideoGallery from './gallery/VideoGallery';
+import VideoContent from './videoContent/VideoContent';
 import React from 'react';
+import { Paper, rgbToHex } from '@mui/material';
 
-
-export default async function Home() {
+export default function Home() {
   return (
     <>
-      <VideoGallery />
+      <VideoContent />
     </>
   );
 }

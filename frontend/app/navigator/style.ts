@@ -7,7 +7,6 @@ export const CircleBtn = styled(Button)(() => ({
   alignItems: 'center',
   justifyContent: 'center',
   padding: 0,
-  backgroundColor: 'rgba(255, 255, 255, 0.1)',
   opacity: 0.7,
     '&:hover': {
         opacity: 1,
