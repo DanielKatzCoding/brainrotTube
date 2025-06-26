@@ -5,7 +5,7 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeDownAltIcon from '@mui/icons-material/VolumeDownAlt';
 import VolumeMuteIcon from '@mui/icons-material/VolumeMute';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
-import { useVideoRef, useVideoProgress } from '../videoPlayer/VideoPlayer';
+import { useVideoRef, useVideoProgress } from '../VideoPlayer';
 
 const ControllerBar = () => {
     const videoRef = useVideoRef();

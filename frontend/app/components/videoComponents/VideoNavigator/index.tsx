@@ -5,7 +5,7 @@ import { Box } from '@mui/material'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { CircleBtn } from './style'
-import { MediaHistoryContext, MediaIndexContext, MaxMediaCountContext, getRandomInt } from '../videoContent/VideoContent'
+import { MediaHistoryContext, MediaIndexContext, MaxMediaCountContext, getRandomInt } from '../VideoContent'
 
 const VideoNavigator = () => {
     const {mediaIndex, setMediaIndex} = useContext(MediaIndexContext)

@@ -1,12 +1,12 @@
 "use client";
 import Grid from '@mui/material/Grid';
 import { Box, CssBaseline, ThemeProvider, Card } from "@mui/material";
-import VideoPlayer, { VideoPlayerProvider } from '../videoPlayer/VideoPlayer';
+import VideoPlayer, { VideoPlayerProvider } from '../VideoPlayer';
 import { useState, useRef, createContext } from 'react';
-import VideoNavigator from '../navigator/VideoNavigator';
-import { IMediaHistory } from '../../interfaces/interfaces';
-import darkTheme from '../../theme';
-import ControllerBar from '../controllerBar/ControllerBar';
+import VideoNavigator from '../VideoNavigator';
+import { IMediaHistory } from '../../../interfaces/interfaces';
+import darkTheme from '../../../theme';
+import ControllerBar from '../ControllerBar';
 
 const MAX_MEDIA_COUNT = 25;
 
