@@ -151,7 +151,6 @@ export default function VideoPlayer({
         ref={videoRef}
         onClick={handleVideoClick}
         onLoadedMetadata={handleLoadedMetadata}
-        style={{ width: "100%" }}
       />
       <IconButtonStyled
         ref={pauseBtnRef}

@@ -7,6 +7,7 @@ import VideoNavigator from "../VideoNavigator";
 import { IMediaHistory } from "../../../interfaces/interfaces";
 import darkTheme from "../../../theme";
 import ControllerBar from "../ControllerBar";
+import ActionBar from "../ActionBar";
 
 const MAX_MEDIA_COUNT = 25;
 
@@ -45,42 +46,31 @@ export default function VideoContent() {
       <CssBaseline />
       <main>
         <Box maxWidth="xl" margin={2}>
-          <MediaHistoryContext.Provider
-            value={{ mediaHistory, setMediaHistory }}
-          >
-            <MaxMediaCountContext.Provider value={MAX_MEDIA_COUNT}>
-              <MediaIndexContext.Provider value={{ mediaIndex, setMediaIndex }}>
-                <VideoPlayerProvider>
-                  <Card>
-                    <Grid
-                      container
-                      justifyContent="flex-start"
-                      alignItems="center"
-                    >
-                      <Grid size="auto" paddingLeft={2} paddingRight={2}>
+          <Card>
+            <VideoPlayerProvider>
+              <Grid container justifyContent="flex-start" alignItems="center">
+                <Grid size={1}>
+                  <MediaIndexContext.Provider value={{ mediaIndex, setMediaIndex }}>
+                    <MaxMediaCountContext.Provider value={MAX_MEDIA_COUNT}>    
+                      <MediaHistoryContext.Provider value={{ mediaHistory, setMediaHistory }}>
                         <VideoNavigator />
-                      </Grid>
-                      <Grid size={10}>
-                        <VideoPlayer
-                          title="the title"
-                          src={apiUrl.current + `?index=${mediaIndex}`}
-                        />
-                      </Grid>
-                    </Grid>
-                    <Grid
-                      container
-                      justifyContent="flex-start"
-                      alignItems="center"
-                    >
-                      <Grid size={12}>
-                        <ControllerBar />
-                      </Grid>
-                    </Grid>
-                  </Card>
-                </VideoPlayerProvider>
-              </MediaIndexContext.Provider>
-            </MaxMediaCountContext.Provider>
-          </MediaHistoryContext.Provider>
+                      </MediaHistoryContext.Provider>
+                    </MaxMediaCountContext.Provider>
+                  </MediaIndexContext.Provider>
+                </Grid>
+                <Grid size={10.5}>
+                  <VideoPlayer
+                    title="video"
+                    src={apiUrl.current + `?index=${mediaIndex}`}
+                  />
+                  <ControllerBar />
+                </Grid>
+                <Grid size={.5}>
+                  <ActionBar />
+                </Grid>
+              </Grid>              
+            </VideoPlayerProvider>
+          </Card>
         </Box>
       </main>
     </ThemeProvider>
