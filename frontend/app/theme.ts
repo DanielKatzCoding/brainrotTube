@@ -1,26 +1,39 @@
+
 import { createTheme } from "@mui/material/styles";
+
+const bgDark = "hsl(0 0% 0%)";
+const bg = "hsl(0 0% 5%)";
+const bgLight = "hsl(0 0% 10%)";
+
+const text = "hsl(0 0% 95%)";
+const textMuted = "hsl(0 0% 70%)";
+
+const primary = "hsl(200 70% 70%)";
+const secondary = "hsl(15 100% 80%)";
+
+const primaryHover = "hsl(200 70% 70% / 0.2)";
 
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#8ecae6", // Soft blue
-      contrastText: "#121212",
+      main: primary,
+      contrastText: bgDark,
     },
     secondary: {
-      main: "#ffb4a2", // Soft coral
-      contrastText: "#121212",
+      main: secondary,
+      contrastText: bgDark,
     },
     background: {
-      default: "rgba(11, 14, 19, 1)", // Deep dark
-      paper: "rgba(30, 30, 40, 0.7)", // Semi-transparent for glass effect
+      default: bgDark,
+      paper: bgLight,
     },
     text: {
-      primary: "#f1f1f1",
-      secondary: "#b0b0b0",
-      disabled: "#666a73",
+      primary: text,
+      secondary: textMuted,
+      disabled: textMuted,
     },
-    divider: "rgba(255,255,255,0.1)",
+    divider: text,
   },
   typography: {
     fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
@@ -34,29 +47,27 @@ const darkTheme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          background: "rgba(30, 30, 40, 0.7)",
-          backdropFilter: "blur(16px)", // Glass blur
-          boxShadow: "0 8px 32px 0 rgba(0,0,0,0.37)",
-          border: "1px solid rgba(255,255,255,0.12)",
+          background: bgLight,
+          backdropFilter: "blur(16px)",
+          border: `1px solid ${text}`,
         },
       },
     },
     MuiAppBar: {
       styleOverrides: {
         root: {
-          background: "rgba(20, 20, 30, 0.8)",
+          background: bg,
           backdropFilter: "blur(12px)",
-          borderBottom: "1px solid rgba(255,255,255,0.08)",
+          borderBottom: `1px solid ${text}`,
         },
       },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          background: "rgba(24, 30, 44, 0.5)",
-          boxShadow: "0 2px 12px 0 rgba(142,202,230,0.15)",
+          background: bg,
           borderRadius: 18,
-          border: "1px solid rgba(37, 42, 55, 1)",
+          border: `1px solid ${bgLight}`,
         },
       },
     },
@@ -64,12 +75,14 @@ const darkTheme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 10,
-          background: "rgba(24, 30, 44, 0.5)",
-          border: "1px solid rgba(142,202,230,0.14)",
-          color: "#8ecae6",
+          background: bg,
+          border: `1px solid ${primary}`,
+          color: primary,
+          opacity: 0.7,
           "&:hover": {
-            background: "rgba(142, 202, 230, 0.32)",
-            boxShadow: "0 4px 16px rgba(142, 202, 230, 0.18)",
+            opacity: 1,
+            backgroundColor: primaryHover,
+            transition: "opacity 0.3s ease",            
           },
         },
       },
@@ -77,26 +90,24 @@ const darkTheme = createTheme({
     MuiSlider: {
       styleOverrides: {
         root: {
-          color: "#8ecae6",
-        },
-        thumb: {
-          "&:hover, &.Mui-focusVisible, &.Mui-active": {
-            boxShadow: "0 0 0 8px rgba(142,202,230,0.16)",
-          },
+          color: primary,
         },
       },
     },
     MuiIconButton: {
       styleOverrides: {
         root: {
-          color: "#8ecae6",
+          color: primary,
+          opacity: 0.7,
           "&:hover": {
-            background: "rgba(142,202,230,0.22)",
+            opacity: 1,
+            backgroundColor: primaryHover,
+            transition: "opacity 0.3s ease",            
           },
         },
       },
     },
-  },
+  }
 });
 
 export default darkTheme;
