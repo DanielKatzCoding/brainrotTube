@@ -1,5 +1,5 @@
-import VideoContent from './components/videoContent/VideoContent';
-import React from 'react';
+import VideoContent from "./components/videoComponents/VideoContent";
+import React from "react";
 
 export default function Home() {
   return (
