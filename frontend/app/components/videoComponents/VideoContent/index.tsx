@@ -2,7 +2,7 @@
 import Grid from "@mui/material/Grid";
 import { Box, CssBaseline, ThemeProvider, Card } from "@mui/material";
 import VideoPlayer, { VideoPlayerProvider } from "../VideoPlayer";
-import { useState, useRef, createContext } from "react";
+import { useState, useRef, createContext, useEffect } from "react";
 import VideoNavigator from "../VideoNavigator";
 import { IMediaHistory } from "../../../interfaces/interfaces";
 import darkTheme from "../../../theme";
@@ -35,11 +35,33 @@ export default function VideoContent() {
   const [mediaIndex, setMediaIndex] = useState(
     getRandomInt(0, MAX_MEDIA_COUNT),
   );
-  const apiUrl = useRef(`http://localhost:8000/api/media`);
+
   const [mediaHistory, setMediaHistory] = useState<IMediaHistory>({
     currIndex: -1,
     mediaHistory: [],
   });
+
+  const [hovered, setHovered] = useState(false);
+
+  const apiUrl = useRef(`http://localhost:8000/api/media`);
+  const videoNavRef = useRef<HTMLDivElement | null>(null);
+  const controllerBarRef = useRef<HTMLDivElement | null>(null);
+  const actionBarRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!videoNavRef.current || !controllerBarRef.current || !actionBarRef.current) return;
+    
+    if (hovered) {
+      videoNavRef.current.style.opacity = "100%";
+      controllerBarRef.current.style.opacity = "100%";
+      actionBarRef.current.style.opacity = "100%";
+    } else {
+      videoNavRef.current.style.opacity = "0%";
+      controllerBarRef.current.style.opacity = "0%";
+      actionBarRef.current.style.opacity = "0%";
+    }
+    
+  }, [hovered]);
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -47,9 +69,17 @@ export default function VideoContent() {
       <main>
         <Box maxWidth="xl" margin={2}>
           <Card>
-            <VideoPlayerProvider>
-              <Grid container justifyContent="flex-start" alignItems="center">
-                <Grid size={1}>
+            <VideoPlayerProvider>                               
+              <Grid container alignItems={"center"}
+              onMouseEnter={() => setHovered(true)}
+              onMouseLeave={() => setHovered(false)}>
+                <Grid size={12}>
+                  <VideoPlayer
+                    title="video"
+                    src={apiUrl.current + `?index=${mediaIndex}`}
+                  />
+                </Grid>
+                <Grid position={"absolute"} size={"auto"} padding={1} ref={videoNavRef} style={{ transition: "opacity 0.5s" }}>
                   <MediaIndexContext.Provider value={{ mediaIndex, setMediaIndex }}>
                     <MaxMediaCountContext.Provider value={MAX_MEDIA_COUNT}>    
                       <MediaHistoryContext.Provider value={{ mediaHistory, setMediaHistory }}>
@@ -58,17 +88,13 @@ export default function VideoContent() {
                     </MaxMediaCountContext.Provider>
                   </MediaIndexContext.Provider>
                 </Grid>
-                <Grid size={10.5}>
-                  <VideoPlayer
-                    title="video"
-                    src={apiUrl.current + `?index=${mediaIndex}`}
-                  />
-                  <ControllerBar />
+                <Grid position={"absolute"} bottom={0} size={12} padding={1} ref={controllerBarRef} style={{ transition: "opacity 0.5s" }}>
+                  <ControllerBar />                  
                 </Grid>
-                <Grid size={.5}>
+                <Grid position={"absolute"} right={0} size="auto" padding={1} ref={actionBarRef} style={{ transition: "opacity 0.5s" }}>
                   <ActionBar />
-                </Grid>
-              </Grid>              
+                </Grid>       
+              </Grid>
             </VideoPlayerProvider>
           </Card>
         </Box>

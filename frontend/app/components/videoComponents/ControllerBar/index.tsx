@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Container, Slider } from "@mui/material";
+import { Box, Container, Slider } from "@mui/material";
 import {
   SliderBox,
   VolumeBox,
@@ -91,14 +91,13 @@ const ControllerBar = () => {
   }, [videoRef]);
 
   return (
-    <Container
+    <Box
       sx={{
         color: "white",
         display: "flex",
         width: "100%",
         height: "4rem",
-        gap: "1rem",
-        justifyContent: "space-between",
+        justifyContent: "space-around",
       }}
     >
       <SliderBox>
@@ -158,7 +157,7 @@ const ControllerBar = () => {
           {getVolumeIcon()}
         </IconButtonStyled>
       </VolumeBox>
-    </Container>
+    </Box>
   );
 };
 
