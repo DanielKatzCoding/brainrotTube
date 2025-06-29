@@ -5,6 +5,8 @@ const bgDark = "hsl(0 0% 0%)";
 const bg = "hsl(0 0% 5%)";
 const bgLight = "hsl(0 0% 10%)";
 
+const bgBorder = "hsl(0 0% 20%)";
+
 const text = "hsl(0 0% 95%)";
 const textMuted = "hsl(0 0% 70%)";
 
@@ -49,7 +51,7 @@ const darkTheme = createTheme({
         root: {
           background: bgLight,
           backdropFilter: "blur(16px)",
-          border: `1px solid ${text}`,
+          border: `1px solid ${bgBorder}`,
         },
       },
     },
@@ -58,7 +60,7 @@ const darkTheme = createTheme({
         root: {
           background: bg,
           backdropFilter: "blur(12px)",
-          borderBottom: `1px solid ${text}`,
+          borderBottom: `1px solid ${bgBorder}`,
         },
       },
     },
@@ -67,7 +69,7 @@ const darkTheme = createTheme({
         root: {
           background: bg,
           borderRadius: 18,
-          border: `1px solid ${bgLight}`,
+          border: `1px solid ${bgBorder}`,
         },
       },
     },
@@ -76,7 +78,7 @@ const darkTheme = createTheme({
         root: {
           borderRadius: 10,
           background: bg,
-          border: `1px solid ${primary}`,
+          border: `1px solid ${bgBorder}`,
           color: primary,
           opacity: 0.7,
           "&:hover": {
