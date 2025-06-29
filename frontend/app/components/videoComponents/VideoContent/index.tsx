@@ -79,7 +79,7 @@ export default function VideoContent() {
                     src={apiUrl.current + `?index=${mediaIndex}`}
                   />
                 </Grid>
-                <Grid position={"absolute"} size={"auto"} padding={1} ref={videoNavRef} style={{ transition: "opacity 0.5s" }}>
+                <Grid position={"absolute"} size={"auto"} paddingLeft={1} ref={videoNavRef} style={{ transition: "opacity 0.5s" }}>
                   <MediaIndexContext.Provider value={{ mediaIndex, setMediaIndex }}>
                     <MaxMediaCountContext.Provider value={MAX_MEDIA_COUNT}>    
                       <MediaHistoryContext.Provider value={{ mediaHistory, setMediaHistory }}>
@@ -88,10 +88,10 @@ export default function VideoContent() {
                     </MaxMediaCountContext.Provider>
                   </MediaIndexContext.Provider>
                 </Grid>
-                <Grid position={"absolute"} bottom={0} size={12} padding={1} ref={controllerBarRef} style={{ transition: "opacity 0.5s" }}>
+                <Grid position={"absolute"} bottom={0} size={12} paddingBottom={1} ref={controllerBarRef} style={{ transition: "opacity 0.5s" }}>
                   <ControllerBar />                  
                 </Grid>
-                <Grid position={"absolute"} right={0} size="auto" padding={1} ref={actionBarRef} style={{ transition: "opacity 0.5s" }}>
+                <Grid position={"absolute"} right={0} size="auto" paddingRight={1} ref={actionBarRef} style={{ transition: "opacity 0.5s" }}>
                   <ActionBar />
                 </Grid>       
               </Grid>
