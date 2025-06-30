@@ -2,19 +2,13 @@
 import Grid from "@mui/material/Grid";
 import { Box, CssBaseline, ThemeProvider, Card } from "@mui/material";
 import VideoPlayer, { VideoPlayerProvider } from "../VideoPlayer";
-import { useState, useRef, createContext, useEffect } from "react";
+import { useState, useRef, createContext, useEffect, useContext } from "react";
 import VideoNavigator from "../VideoNavigator";
 import { IMediaHistory } from "../../../interfaces/interfaces";
 import darkTheme from "../../../theme";
 import ControllerBar from "../ControllerBar";
 import ActionBar from "../ActionBar";
-
-const MAX_MEDIA_COUNT = 25;
-
-export const MediaIndexContext = createContext<{
-  mediaIndex: number;
-  setMediaIndex: React.Dispatch<React.SetStateAction<number>>;
-}>(null!);
+import { MediaIndexContext, MAX_MEDIA_COUNT } from "../../MainComponent"
 
 export const MediaHistoryContext = createContext<{
   mediaHistory: IMediaHistory;
@@ -28,14 +22,11 @@ export const ProgressContext = createContext<{
 
 export const MaxMediaCountContext = createContext<number>(null!);
 
-export const getRandomInt = (min: number, max: number): number =>
-  Math.floor(Math.random() * (max - min)) + min;
+
 
 export default function VideoContent() {
-  const [mediaIndex, setMediaIndex] = useState(
-    getRandomInt(0, MAX_MEDIA_COUNT),
-  );
 
+  const { mediaIndex, setMediaIndex } = useContext(MediaIndexContext);
   const [mediaHistory, setMediaHistory] = useState<IMediaHistory>({
     currIndex: -1,
     mediaHistory: [],

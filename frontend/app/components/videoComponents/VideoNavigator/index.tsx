@@ -7,10 +7,10 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { CircleBtn } from "./style";
 import {
   MediaHistoryContext,
-  MediaIndexContext,
   MaxMediaCountContext,
-  getRandomInt,
 } from "../VideoContent";
+
+import { MediaIndexContext, getRandomInt } from "../../MainComponent";
 
 const VideoNavigator = () => {
   const { mediaIndex, setMediaIndex } = useContext(MediaIndexContext);
