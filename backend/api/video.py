@@ -1,7 +1,9 @@
 from fastapi import APIRouter, Request, Query
 from model.video_streamer import VideoStreamer
+from utils.request import Comment, Video
+from utils.response import VideoData, CommentData
 
-class URIRoutes(APIRouter):
+class URIRoute(APIRouter):
     def __init__(self):
         """Initialize the URI routes with a prefix and tags."""
         super().__init__(prefix="/api", tags=["URI"])
@@ -13,3 +15,6 @@ class URIRoutes(APIRouter):
         index: int = Query(..., ge=0)  # '...' makes it required, ge=0 ensures non-negative
     ):
         return await VideoStreamer().stream_video(request, index)
+    
+    async def get_video_data(self, video_data: Video):
+        raise NotImplementedError

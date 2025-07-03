@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from api.uri_routes import URIRoutes
-import uvicorn
+from api.video import URIRoute
 from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
 
 app = FastAPI()
 
@@ -14,7 +14,8 @@ app.add_middleware(
 )
 
 
-app.include_router(URIRoutes())
+app.include_router(URIRoute())
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
