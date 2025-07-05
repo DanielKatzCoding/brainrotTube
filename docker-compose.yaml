@@ -1,0 +1,44 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: pgadmin
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: brainrotdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: backend
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_URI: postgresql://pgadmin:mypassword@postgres:5432/brainrotdb
+      MEDIA_PATH: /app/media
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./media:/app/media
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+
+volumes:
+  pgdata:
+    driver: local

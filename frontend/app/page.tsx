@@ -1,10 +1,11 @@
-import VideoContent from "./components/videoComponents/VideoContent";
 import React from "react";
+import MainComponent from "./components/MainComponent";
+
 
 export default function Home() {
+
+
   return (
-    <>
-      <VideoContent />
-    </>
+    <MainComponent />
   );
 }
