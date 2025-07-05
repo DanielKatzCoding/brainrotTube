@@ -2,6 +2,9 @@ from fastapi import FastAPI
 from api.video import URIRoute
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
+from setup import Setup
+
+Setup().start()
 
 app = FastAPI()
 
