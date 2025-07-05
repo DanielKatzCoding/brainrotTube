@@ -1,15 +1,17 @@
 version: '3.8'
 services:
-  mongo:
-    image: mongo:7
-    container_name: mongo
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    restart: always
     ports:
-      - "27017:27017"
+      - "5432:5432"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: mongoadmin
-      MONGO_INITDB_ROOT_PASSWORD: mypassword
+      POSTGRES_USER: pgadmin
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: brainrotdb
     volumes:
-      - data:/data/db
+      - pgdata:/var/lib/postgresql/data
 
 
   backend:
@@ -18,9 +20,10 @@ services:
       dockerfile: backend/Dockerfile
     container_name: backend
     depends_on:
-      - mongo
+      - postgres
     environment:
-      MONGO_URI: mongodb://mongoadmin:mypassword@mongo:27017
+      POSTGRES_URI: postgresql://pgadmin:mypassword@postgres:5432/brainrotdb
+      MEDIA_PATH: /app/media
     ports:
       - "8000:8000"
     volumes:
@@ -37,5 +40,5 @@ services:
       - "3000:3000"
 
 volumes:
-  data:
+  pgdata:
     driver: local

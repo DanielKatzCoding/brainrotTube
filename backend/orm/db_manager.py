@@ -11,7 +11,7 @@ class DatabaseManager:
         Base.metadata.create_all(self.engine)
         self.Session = sessionmaker(bind=self.engine)
 
-    def get_video_records(self) -> list[VideoAlias]:
+    def get_videoalias_records(self) -> list[VideoAlias]:
         lst = []
         with self.connection() as session:
             for video_alias in session.query(VideoAlias).all():
@@ -21,17 +21,19 @@ class DatabaseManager:
                     )
                 )
         return lst
-            
-        
-    def delete_video_record(self, video_id: str):
+    
+    def get_video_record(self, video_id) -> Video | None:
         with self.connection() as session:
-            obj_video_alias = session.query(VideoAlias).get(video_id)
-            obj_video = session.query(Video).get(video_id)
-            session.delete(obj_video)
-            session.delete(obj_video_alias)            
+            video = session.query(Video).filter(Video.video_id == video_id).one_or_none()
+            if video:
+                return Video(
+                video_id=video.video_id,
+                title=video.title,
+                description=video.description,
+                likes=video.likes
+            )
 
-
-    def insert_video(self, video_name: str):
+    def insert_video(self, video_name: str, description, likes):
         with self.connection() as session:
             tb = VideoAlias(
                 real_name=video_name,
@@ -44,12 +46,35 @@ class DatabaseManager:
             tb2 = Video(
                 video_id=video_id,
                 title=name,
-                description=f"Default description for {name}",
-                likes=randint(0, 1_000_000)
+                description=description,
+                likes=likes
             )
 
             session.add_all([tb, tb2])
+
+    def delete_video_record(self, video_id: str):
+        with self.connection() as session:
+            obj_video_alias = session.query(VideoAlias).get(video_id)
+            obj_video = session.query(Video).get(video_id)
+            session.delete(obj_video)
+            session.delete(obj_video_alias)         
+
+    def insert_comment(self, comment, video_id):
+        with self.connection() as session:
+            tb = Comment(
+                username=comment["name"],
+                email=comment["email"],
+                body=comment["body"],
+                video_id=video_id
+            )
+
+            session.add(tb)
             
+    def delete_comments(self, video_id: str):
+        with self.connection() as session:
+            objs = session.query(Comment).filter(Comment.video_id == video_id).all()
+            for obj in objs:
+                session.delete(obj)
 
     @contextmanager
     def connection(self):
