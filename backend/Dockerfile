@@ -10,8 +10,9 @@ COPY backend/. .
 
 RUN pip install uvicorn
 
-RUN uv sync --no-dev
+RUN uv sync
 
 EXPOSE 8000
 
-CMD ["uv", "run", "app.py", "--no-dev"]
+CMD ["uv", "run", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+

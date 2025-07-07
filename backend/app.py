@@ -1,10 +1,15 @@
 from fastapi import FastAPI
 from api.video import URIRoute
 from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
 from setup import Setup
+from contextlib import asynccontextmanager
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app):
+    Setup().start()  # This runs at startup
+    yield
+
+app = FastAPI(lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -16,8 +21,3 @@ app.add_middleware(
 
 
 app.include_router(URIRoute())
-
-
-if __name__ == "__main__":
-    Setup().start()
-    uvicorn.run(app, host="0.0.0.0", port=8000)

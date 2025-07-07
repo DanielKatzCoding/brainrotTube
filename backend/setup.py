@@ -34,14 +34,13 @@ class Setup:
         for record in records_lst:
             video_record = self.__client.get_video_record(record.video_id)
             comments_amount = video_record.likes // 50  # simulate real ratio
-            
             with open("/app/fake_comments.json", 'r') as f:
                 comments_json = json.load(f)
             
             for _ in range(comments_amount):
-                comment = comments_json[randint(0, len(comments_json))]
+                comment = comments_json[randint(0, len(comments_json)-1)]
                 self.__client.insert_comment(comment, record.video_id)
-            
+                
 
     def delete_trash_data(self):
         records_lst = self.__client.get_videoalias_records()
@@ -62,9 +61,10 @@ class Setup:
 
 
     def start(self):
+        print("[*] DELETING TRASH DATA")        
+        self.delete_trash_data()  
         print("[*] GENERATING VIDEO DATA")
         self.generate_videos_data()
         print("[*] GENERATING COMMENTS DATA")
         self.generate_comments_data()
-        print("[*] DELETING TRASH DATA")        
-        self.delete_trash_data()        
+              
