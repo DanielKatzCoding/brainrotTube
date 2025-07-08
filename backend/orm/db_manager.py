@@ -11,10 +11,16 @@ class DatabaseManager:
         Base.metadata.create_all(self.engine)
         self.Session = sessionmaker(bind=self.engine)
 
-    def get_videoalias_records(self) -> list[VideoAlias]:
+    def get_videoalias_records(self, offset: int | None = None, size: int | None = None) -> list[VideoAlias]:
         lst = []
         with self.connection() as session:
-            for video_alias in session.query(VideoAlias).all():
+            records = None
+            if offset is not None and size is not None:
+                records = session.query(VideoAlias).offset(offset).limit(size).all()
+            else:
+                records = session.query(VideoAlias).all()
+
+            for video_alias in records:
                 lst.append(VideoAlias(
                     video_id=video_alias.video_id,
                     real_name=video_alias.real_name
@@ -87,34 +93,3 @@ class DatabaseManager:
             raise
         finally:
             session.close()
-
-    # def create(self, obj):
-    #     session = self.Session()
-    #     session.add(obj)
-    #     session.commit()
-    #     session.refresh(obj)
-    #     session.close()
-    #     return obj
-
-    # def read(self, model, obj_id):
-    #     session = self.Session()
-    #     result = session.query(model).get(obj_id)
-    #     session.close()
-    #     return result
-
-    # def update(self, model, obj_id, **kwargs):
-    #     session = self.Session()
-    #     obj = session.query(model).get(obj_id)
-    #     for key, value in kwargs.items():
-    #         setattr(obj, key, value)
-    #     session.commit()
-    #     session.refresh(obj)
-    #     session.close()
-    #     return obj
-
-    # def delete(self, model, obj_id):
-    #     session = self.Session()
-    #     obj = session.query(model).get(obj_id)
-    #     session.delete(obj)
-    #     session.commit()
-    #     session.close()
