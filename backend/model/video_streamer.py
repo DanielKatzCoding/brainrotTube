@@ -6,11 +6,13 @@ class VideoStreamer:
     VIDEO_DIR = os.path.abspath("./media")
     CHUNK_SIZE = 1024 * 1024  # 1MB chunks
 
-    def get_video_path(self, index) -> str:
-        files = sorted(os.listdir(self.VIDEO_DIR))
-        if index >= len(files):
-            raise HTTPException(status_code=404, detail="Video not found")
-        return os.path.join(self.VIDEO_DIR, files[index])
+    def get_video_path(self, filename) -> str:
+ 
+        for file in os.listdir(self.VIDEO_DIR):
+            name, _ = os.path.splitext(file)
+            if name == filename:
+                return os.path.join(self.VIDEO_DIR, file)
+        raise HTTPException(status_code=404, detail="Video not found")
 
     def parse_range_header(self, range_header: str, file_size: int) -> tuple:
         try:
@@ -40,8 +42,8 @@ class VideoStreamer:
                 remaining -= len(data)
                 yield data
 
-    async def stream_video(self, request: Request, index: int):
-        file_path = self.get_video_path(index)
+    async def stream_video(self, request: Request, filename: int):
+        file_path = self.get_video_path(filename)
         file_size = os.path.getsize(file_path)
         range_header = request.headers.get('range')
 

@@ -18,9 +18,10 @@ class Setup:
             records = {record.real_name: record.video_id for record in records_lst}
 
         for file in self.__files:
-            if not records.get(file):
-                self.__client.insert_video(file,
-                                           f"Default description for {file.split('.')[0]}",
+            filename = os.path.splitext(file)[0]
+            if not records.get(filename):
+                self.__client.insert_video(filename,
+                                           f"Default description for {filename}",
                                            randint(0, 1_000_000)
                                            )
             else:
@@ -33,7 +34,7 @@ class Setup:
 
         for record in records_lst:
             video_record = self.__client.get_video_record(record.video_id)
-            comments_amount = video_record.likes // 50  # simulate real ratio
+            comments_amount = video_record.likes // 100 * 20  # simulate real ratio
             for _ in range(comments_amount):
                 comment = comments_json[randint(0, len(comments_json)-1)]
                 self.__client.insert_comment(comment, record.video_id)
@@ -43,7 +44,7 @@ class Setup:
         records_lst = self.__client.get_videoalias_records()
         for file in self.__files:
             for record in records_lst.copy():
-                if record.real_name == file.split('.')[0]:
+                if record.real_name == os.path.splitext(file)[0]:
                     records_lst.remove(record)
                     break
 
