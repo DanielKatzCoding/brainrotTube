@@ -3,9 +3,9 @@ from pydantic import BaseModel
 class VideoData(BaseModel):
     title: str
     description: str
-    likes: int
-    comments: int
-    views: int
+    video_id: str
+    likes_count: int
+    comments_count: int
 
 
 class CommentData(BaseModel):
