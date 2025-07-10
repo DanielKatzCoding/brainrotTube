@@ -2,7 +2,7 @@
 import VideoContent from "./videoComponents/VideoContent";
 import React, { createContext, useState } from "react";
 
-export const MAX_MEDIA_COUNT = 25;
+export const MAX_MEDIA_COUNT = 14;
 
 export const getRandomInt = (min: number, max: number): number =>
   Math.floor(Math.random() * (max - min)) + min;
