@@ -1,27 +1,31 @@
-"use client";
 import VideoContent from "./videoComponents/VideoContent";
-import React, { createContext, useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import Media from "./videoComponents/VideoContent/fetchData";
 
-export const MAX_MEDIA_COUNT = 14;
-
-export const getRandomInt = (min: number, max: number): number =>
-  Math.floor(Math.random() * (max - min)) + min;
-
-export const MediaIndexContext = createContext<{
-  mediaIndex: number;
-  setMediaIndex: React.Dispatch<React.SetStateAction<number>>;
-}>(null!);
-
-
+export const apiURL = "http://localhost:8000/api";
 
 const MainComponent = () => {
-  const [mediaIndex, setMediaIndex] = useState(
-    getRandomInt(0, MAX_MEDIA_COUNT),
-  );
+  const queryClient = new QueryClient();
+  const media = Media();
+
+  while (true) {
+    if (media.status == "loading") {
+      console.log("loading");
+    }
+
+    else if (media.status == "ok") {
+      console.log("ok");
+      console.log(media.data?.blobURL);
+      console.log(media.data?.data.videoId);
+      console.log(media.data?.data.title);
+      break;
+    }
+  
+  }
   return (
-    <MediaIndexContext.Provider value={{ mediaIndex, setMediaIndex }}>
-      <VideoContent />
-    </MediaIndexContext.Provider>
+    <QueryClientProvider client={queryClient}>  
+      {/* <VideoContent /> */}      
+    </QueryClientProvider>    
   )
 }
 

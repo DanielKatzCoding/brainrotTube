@@ -4,15 +4,14 @@ import { Box, CssBaseline, ThemeProvider, Card } from "@mui/material";
 import VideoPlayer, { VideoPlayerProvider } from "../VideoPlayer";
 import { useState, useRef, createContext, useEffect, useContext } from "react";
 import VideoNavigator from "../VideoNavigator";
-import { IMediaHistory } from "../../../interfaces/interfaces";
-import darkTheme from "../../../theme";
+import { IMediaContent } from "@/app/interfaces/interfaces";
+import darkTheme from "@/app/theme";
 import ControllerBar from "../ControllerBar";
 import ActionBar from "../ActionBar";
-import { MediaIndexContext, MAX_MEDIA_COUNT } from "../../MainComponent"
 
-export const MediaHistoryContext = createContext<{
-  mediaHistory: IMediaHistory;
-  setMediaHistory: React.Dispatch<React.SetStateAction<IMediaHistory>>;
+export const MediaContext = createContext<{
+  media: IMediaHistory;
+  setMedia: React.Dispatch<React.SetStateAction<IMediaHistory>>;
 }>(null!);
 
 export const ProgressContext = createContext<{
@@ -20,21 +19,14 @@ export const ProgressContext = createContext<{
   setProgress: React.Dispatch<React.SetStateAction<number>>;
 }>(null!);
 
-export const MaxMediaCountContext = createContext<number>(null!);
-
-
-
 export default function VideoContent() {
 
-  const { mediaIndex, setMediaIndex } = useContext(MediaIndexContext);
-  const [mediaHistory, setMediaHistory] = useState<IMediaHistory>({
-    currIndex: -1,
+  const [media, setMedia] = useState<IMediaHistory>({
+    videoId: "",
     mediaHistory: [],
   });
 
   const [hovered, setHovered] = useState(false);
-
-  const apiUrl = useRef(`http://localhost:8000/api/media`);
   const videoNavRef = useRef<HTMLDivElement | null>(null);
   const controllerBarRef = useRef<HTMLDivElement | null>(null);
   const actionBarRef = useRef<HTMLDivElement | null>(null);
@@ -71,13 +63,9 @@ export default function VideoContent() {
                   />
                 </Grid>
                 <Grid position={"absolute"} size={"auto"} paddingLeft={1} ref={videoNavRef} style={{ transition: "opacity 0.5s" }}>
-                  <MediaIndexContext.Provider value={{ mediaIndex, setMediaIndex }}>
-                    <MaxMediaCountContext.Provider value={MAX_MEDIA_COUNT}>    
-                      <MediaHistoryContext.Provider value={{ mediaHistory, setMediaHistory }}>
-                        <VideoNavigator />
-                      </MediaHistoryContext.Provider>
-                    </MaxMediaCountContext.Provider>
-                  </MediaIndexContext.Provider>
+                  <MediaContext.Provider value={{ media, setMedia }}>
+                    <VideoNavigator />
+                  </MediaContext.Provider>
                 </Grid>
                 <Grid position={"absolute"} bottom={0} size={12} paddingBottom={1} ref={controllerBarRef} style={{ transition: "opacity 0.5s" }}>
                   <ControllerBar />                  

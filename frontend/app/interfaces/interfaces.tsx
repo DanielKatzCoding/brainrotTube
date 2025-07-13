@@ -1,12 +1,17 @@
-export interface IMediaContent {
+export interface IVideoData {
   title: string;
+  videoId: string;
   description: string;
-  mediaPath: string;
   likesCount: number;
   commentsCount: number;
 }
 
+export interface IVideo {
+  data: IVideoData,
+  blobURL: string;
+}
+
 export interface IMediaHistory {
-  currIndex: number;
-  mediaHistory: number[];
+  videoId: string;
+  mediaHistory: string[];
 }
