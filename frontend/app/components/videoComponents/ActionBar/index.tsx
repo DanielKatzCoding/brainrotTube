@@ -1,14 +1,23 @@
 import { Box } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { IconButtonStyled } from "./styles";
 import FavoriteBorderSharpIcon from '@mui/icons-material/FavoriteBorderSharp';
 import CommentSharpIcon from '@mui/icons-material/CommentSharp';
+import { MediaHistoryContext } from "../VideoContent";
 
 const ActionBar = () => {
-  const [likes, setLikes] = useState(0);
-  const [comments, setComments] = useState(0);
+  const { mediaHistory, setMediaHistory } = useContext(MediaHistoryContext);
+  const [likes, setLikes] = useState(mediaHistory.mediaHistory[mediaHistory.currIndex].likesCount);
+  const [comments, setComments] = useState(mediaHistory.mediaHistory[mediaHistory.currIndex].commentsCount);
   const [liked, setLiked] = useState(false);
   const [commented, setCommented] = useState(false);
+
+  useEffect(() => {
+    const videoData = mediaHistory.mediaHistory[mediaHistory.currIndex];
+    setLikes(videoData.likesCount);
+    setComments(videoData.commentsCount)
+
+  }, [mediaHistory])
 
   const likeCountUpdate = () => {
     if (!liked) {

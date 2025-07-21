@@ -8,9 +8,11 @@ import React, {
   useContext,
   ReactNode,
 } from "react";
+
 import { CardMedia } from "@mui/material";
 import PauseIcon from "@mui/icons-material/Pause";
 import { IconButtonStyled, VideoFlexContainer } from "./styles";
+import { MediaHistoryContext } from "../VideoContent";
 
 // Contexts for videoRef and progress
 export const VideoRefContext =
@@ -54,20 +56,14 @@ export function VideoPlayerProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export default function VideoPlayer({
-  title,
-  src,
-}: {
-  title: string;
-  src: string;
-}) {
+export default function VideoPlayer() {
   const videoRef = useVideoRef();
   const { setProgress, setDuration } = useVideoProgress();
   const [playing, setPlaying] = useState(false);
-
+  const { mediaHistory, setMediaHistory } = useContext(MediaHistoryContext);
   const pauseBtnRef = useRef<HTMLButtonElement>(null);
   const animationRef = useRef<number | null>(null);
-
+  
   const handleVideoClick = () => {
     setPlaying((prev) => !prev);
   };
@@ -146,11 +142,11 @@ export default function VideoPlayer({
     <VideoFlexContainer>
       <CardMedia
         component="video"
-        title={title}
-        src={src}
+        title={mediaHistory.mediaHistory[mediaHistory.currIndex].title}
+        src={mediaHistory.mediaHistory[mediaHistory.currIndex].videoUrl}
         ref={videoRef}
         onClick={handleVideoClick}
-        onLoadedMetadata={handleLoadedMetadata}
+        onLoadedMetadata={handleLoadedMetadata}        
       />
       <IconButtonStyled
         ref={pauseBtnRef}
