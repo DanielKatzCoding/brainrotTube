@@ -1,5 +1,14 @@
 # BrainRotTube
 
+# Discontinued because the code sucks.
+## This project was meant to practice Fullstack, draw conclutions and enhance my abilities in React.
+# Conclusions
+- Planning components architecture is very important. My code became unbarable to manage because I didn't plan the abstract design.
+- Props! I almost never used props, and instead relied mostly on useContext.
+- Nextjs is awesome but we need to think if we server components relavent for the project (relates to my first point).
+- Overall I believe it made me more comftorble using React and enhaned my abilities at Fullstack
+
+
 A full-stack TikTok-like video platform focused on "brainrot" content. This project is designed to practice and showcase full-stack development skills using Next.js (React, MUI) for the frontend and FastAPI for the backend.
 
 ## Features
